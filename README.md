@@ -323,11 +323,11 @@ Project Structure
 | **public/css/themes**/default.scss | Some Bootstrap overrides to make it look prettier.           |
 | **views/account**/                 | Templates for *login, password reset, signup, profile*.      |
 | **views/api**/                     | Templates for API Examples.                                  |
-| **views/partials**/flash.jade      | Error, info and success flash notifications.                 |
-| **views/partials**/header.jade     | Navbar partial template.                                     |
-| **views/partials**/footer.jade     | Footer partial template.                                     |
-| **views**/layout.jade              | Base template.                                               |
-| **views**/home.jade                | Home page template.                                          |
+| **views/partials**/flash.pug      | Error, info and success flash notifications.                 |
+| **views/partials**/header.pug     | Navbar partial template.                                     |
+| **views/partials**/footer.pug     | Footer partial template.                                     |
+| **views**/layout.pug              | Base template.                                               |
+| **views**/home.pug                | Home page template.                                          |
 | .travis.yml                        | [Travis CI](https://travis-ci.org/) integration.             |
 | .env.example                       | Your API keys, tokens, passwords and database URI.           |
 | app.js                             | The main application file.                                   |
@@ -362,7 +362,7 @@ List of Packages
 | express-validator               | Easy form validation for Express.                                     |
 | fbgraph                         | Facebook Graph API library.                                           |
 | github-api                      | GitHub API library.                                                   |
-| jade                            | Template engine for Express.                                          |
+| pug                            | Template engine for Express.                                          |
 | lastfm                          | Last.fm API library.                                                  |
 | instagram-node                  | Instagram API library.                                                |
 | lob                             | Lob API library                                                       |
@@ -398,8 +398,8 @@ Useful Tools and Resources
 --------------------------
 - [JavaScripting](http://www.javascripting.com/) - The Database of JavaScript Libraries
 - [JS Recipes](http://sahatyalkabov.com/jsrecipes/) - JavaScript tutorials for backend and frontend development.
-- [Jade Syntax Documentation by Example](http://naltatis.github.io/jade-syntax-docs/#attributes) - Even better than official Jade docs.
-- [HTML to Jade converter](http://html2jade.aaron-powell.com) - Extremely valuable when you need to quickly copy and paste HTML snippets from the web.
+- [pug Syntax Documentation by Example](http://naltatis.github.io/pug-syntax-docs/#attributes) - Even better than official pug docs.
+- [HTML to pug converter](http://html2pug.aaron-powell.com) - Extremely valuable when you need to quickly copy and paste HTML snippets from the web.
 - [JavascriptOO](http://www.javascriptoo.com/) - A directory of JavaScript libraries with examples, CDN links, statistics, and videos.
 - [Favicon Generator](http://realfavicongenerator.net/) - Generate favicons for PC, Android, iOS, Windows 8.
 
@@ -507,8 +507,8 @@ or [Compose](https://www.compose.io/), then create a free tier database.
 See [Deployment](#deployment) for more information on how to setup an account
 and a new database step-by-step with mLab.
 
-### Why Jade instead of Handlebars?
-When I first started this project I didn't have any experience with Handlebars. Since then I have worked on Ember.js apps and got myself familiar with the Handlebars syntax. While it is true Handlebars is easier, because it looks like good old HTML, I have no regrets picking Jade over Handlebars. First off, it's the default template engine in Express, so someone who has built Express apps in the past already knows it. Secondly, I find `extends` and `block` to be indispensable, which as far as I know, Handlebars does not have out of the box. And lastly, subjectively speaking, Jade looks much cleaner and shorter than Handlebars, or any non-HAML style for that matter.
+### Why pug instead of Handlebars?
+When I first started this project I didn't have any experience with Handlebars. Since then I have worked on Ember.js apps and got myself familiar with the Handlebars syntax. While it is true Handlebars is easier, because it looks like good old HTML, I have no regrets picking pug over Handlebars. First off, it's the default template engine in Express, so someone who has built Express apps in the past already knows it. Secondly, I find `extends` and `block` to be indispensable, which as far as I know, Handlebars does not have out of the box. And lastly, subjectively speaking, pug looks much cleaner and shorter than Handlebars, or any non-HAML style for that matter.
 
 ### Why do you have all routes defined in app.js?
 For the sake of simplicity. While there might be a better approach,
@@ -526,8 +526,8 @@ REST API server.
 ### I don't need a sticky footer, can I delete it?
 Absolutely. But unlike a regular footer there is a bit more work involved.
 First, delete `#wrap` and `#footer` ID selectors and `html, body { height: 100%; }`
-from **main.less**. Next, delete `#wrap` and `#footer` lines from **layout.jade**
-(By the way, if no element is specified before class or id, Jade assumes it is
+from **main.less**. Next, delete `#wrap` and `#footer` lines from **layout.pug**
+(By the way, if no element is specified before class or id, pug assumes it is
 a `div` element). Don't forget to indent everything under `#wrap` to the left
 once, since this project uses two spaces per block indentation.
 
@@ -564,12 +564,12 @@ Let's start from the beginning. For this example I will use [Escape Velocity](ht
 **Note:** For the sake of simplicity I will only consider `index.html`, and skip `left-sidebar.html`,
 `no-sidebar.html`, `right-sidebar.html`.
 
-Move all JavaScript files from `html5up-escape-velocity/js` to `public/js`. Then move all CSS files from `html5up-escape-velocity/css` to `public/css`. And finally, move all images from `html5up-escape-velocity/images` to `public/images`. You could move it to the existing **img** folder, but that would require manually changing every `img` reference. Grab the contents of `index.html` and paste it into [HTML To Jade](http://html2jade.aaron-powell.com/).
+Move all JavaScript files from `html5up-escape-velocity/js` to `public/js`. Then move all CSS files from `html5up-escape-velocity/css` to `public/css`. And finally, move all images from `html5up-escape-velocity/images` to `public/images`. You could move it to the existing **img** folder, but that would require manually changing every `img` reference. Grab the contents of `index.html` and paste it into [HTML To pug](http://html2pug.aaron-powell.com/).
 
 **Note:** Do not forget to update all the CSS and JS paths accordingly.
 
-Create a new file `escape-velocity.jade` and paste the Jade markup in `views` folder.
-Whenever you see the code `res.render('account/login')` - that means it will search for `views/account/login.jade` file.
+Create a new file `escape-velocity.pug` and paste the pug markup in `views` folder.
+Whenever you see the code `res.render('account/login')` - that means it will search for `views/account/login.pug` file.
 
 Let's see how it looks. Create a new controller **escapeVelocity** inside `controllers/home.js`:
 
@@ -588,9 +588,9 @@ app.get('/escape-velocity', homeController.escapeVelocity);
 
 Restart the server (if you are not using **nodemon**), then you should see the new template at [http://localhost:3000/escape-velocity](http://localhost:3000/escape-velocity).
 
-I will stop right here, but if you would like to use this template as more than just a single page, take a look at how these Jade templates work: `layout.jade` - base template, `index.jade` - home page, `partials/header.jade` - Bootstrap navbar, `partials/footer.jade` - sticky footer. You will have to manually break it apart into smaller pieces. Figure out which part of the template you want to keep the same on all pages - that's your new `layout.jade`.
-Then, each page that changes, be it `index.jade`, `about.jade`, `contact.jade`
-will be embedded in your new `layout.jade` via `block content`. Use existing templates as a reference.
+I will stop right here, but if you would like to use this template as more than just a single page, take a look at how these pug templates work: `layout.pug` - base template, `index.pug` - home page, `partials/header.pug` - Bootstrap navbar, `partials/footer.pug` - sticky footer. You will have to manually break it apart into smaller pieces. Figure out which part of the template you want to keep the same on all pages - that's your new `layout.pug`.
+Then, each page that changes, be it `index.pug`, `about.pug`, `contact.pug`
+will be embedded in your new `layout.pug` via `block content`. Use existing templates as a reference.
 
 This is a rather lengthy process, and templates you get from elsewhere,
 might have yet another grid system. That's why I chose *Bootstrap* for the Hackathon Starter.
@@ -613,7 +613,7 @@ thanks to *express-flash*.
 
 Flash messages have a two-step process. You use `req.flash('errors', { msg: 'Error messages goes here' }`
 to create a flash message in your controllers, and then display them in your views:
-```jade
+```pug
 if messages.errors
   .alert.alert-danger.fade.in
     for error in messages.errors
@@ -637,7 +637,7 @@ why an error has occurred. Here is a more general example of what express-valida
 
 To keep consistent with that style, you should pass all flash messages
 as `{ msg: 'My flash message' }` instead of a string. Otherwise you will just see an alert box
-without an error message. That is because, in **partials/flash.jade** template it will try to output
+without an error message. That is because, in **partials/flash.pug** template it will try to output
 `error.msg` (i.e. `"My flash message".msg`), in other words it will try to call a `msg` method on a *String* object,
 which will return *undefined*. Everything I just mentioned about errors, also applies
 to "info" and "success" flash messages, and you could even create a new one yourself, such as:
@@ -648,20 +648,20 @@ req.flash('warning', { msg: 'You have exceeded 90% of your data usage' });
 ```
 
 **User Account Page (Example)**
-```jade
+```pug
 if messages.warning
   .alert.alert-warning.fade.in
     for warning in messages.warning
       div= warning.msg
 ```
 
-`partials/flash.jade` is a partial template that contains how flash messages
+`partials/flash.pug` is a partial template that contains how flash messages
 are formatted. Previously, flash
 messages were scattered throughout each view that used flash messages
 (contact, login, signup, profile), but now, thankfully it is uses a *DRY* approach.
 
-The flash messages partial template is *included* in the `layout.jade`, along with footer and navigation.
-```jade
+The flash messages partial template is *included* in the `layout.pug`, along with footer and navigation.
+```pug
 body
   #wrap
     include partials/navigation
@@ -778,8 +778,8 @@ exports.getBooks = (req, res) => {
 var bookController = require('./controllers/book');
 ```
 
-**Step 5.** Create `books.jade` template.
-```jade
+**Step 5.** Create `books.pug` template.
+```pug
 extends layout
 
 block content
@@ -889,7 +889,7 @@ server.listen(app.get('port'), () => {
 
 At this point we are done with the back-end.
 
-You now have a choice - to include your JavaScript code in Jade templates or have all your client-side
+You now have a choice - to include your JavaScript code in pug templates or have all your client-side
 JavaScript in a separate file - in `main.js`. I will admit, when I first started out with Node.js and JavaScript in general,
 I placed all JavaScript code inside templates because I have access to template variables passed in from Express
 right then and there. It's the easiest thing you can do, but also the least efficient and harder to maintain. Since then I
@@ -901,10 +901,10 @@ want to [*"get shit done"*](https://www.startupvitamins.com/media/products/13/aa
 Well, either way, use whichever approach makes more sense to you. At the end of the day,
 it's **what** you build that matters, not **how** you build it.
 
-If you want to stick all your JavaScript inside templates, then in `layout.jade` -
+If you want to stick all your JavaScript inside templates, then in `layout.pug` -
 your main template file, add this to `head` block.
 
-```jade
+```pug
 script(src='/socket.io/socket.io.js')
 script.
     var socket = io.connect(window.location.href);
@@ -1131,7 +1131,7 @@ Changelog
 - Updated Font Awesome v4.5.0.
 - Removed `debug` and `outputStyle` from the Sass middleware options.
 - Removed `connect-assets` (no longer used) from *package.json*`.
-- Fixed Font Awesome icon syntax error in *profile.jade*.
+- Fixed Font Awesome icon syntax error in *profile.pug*.
 - Fixed Cheerio broken link.
 
 ### 3.4.0 (January 5, 2016)
@@ -1179,7 +1179,7 @@ Changelog
 - Fixed an email issue with Google login.
 
 ### 3.0.2 (March 31, 2015)
-- Renamed `navbar.jade` to `header.jade`.
+- Renamed `navbar.pug` to `header.pug`.
 - Fixed typos in README. Thanks @josephahn and @rstormsf.
 - Fix radio button alignment on small screens in Profile page.
 - Increased `bcrypt.genSalt()` from **5** to **10**.
@@ -1284,7 +1284,7 @@ Changelog
 - Added **Compose new Tweet** to Twitter API example
 - Fixed email service indentation
 - Fixed Mailgun and Mandrill secret.js properties
-- Renamed `navigation.jade` to `navbar.jade`
+- Renamed `navigation.pug` to `navbar.pug`
 
 ### 2.1 (May 13, 2014)
 - New and improved generator - **setup.js**
@@ -1312,7 +1312,7 @@ Changelog
 ### 2.0.1 (April 18, 2014)
 - Conditional CSRF support using [lusca](https://github.com/krakenjs/lusca)
 - Fixed EOL problem in `generator.js` for Windows users
-- Fixed outdated csrf token string on profile.jade
+- Fixed outdated csrf token string on profile.pug
 - Code cleanup
 
 ### 2.0.0 (April 15, 2014)
@@ -1354,7 +1354,7 @@ project, I cannot accept every pull request. Please open an issue before
 submitting a pull request. This project uses
 [Airbnb JavaScript Style Guide](https://github.com/airbnb/javascript) with a
 few minor exceptions. If you are submitting a pull request that involves
-Jade templates, please make sure you are using *spaces*, not tabs.
+pug templates, please make sure you are using *spaces*, not tabs.
 
 License
 -------
